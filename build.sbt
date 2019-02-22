@@ -1,3 +1,5 @@
+import sbt.Keys.scalacOptions
+
 name := "sparky"
 
 val releaseVersion = "0.0.1"
@@ -5,12 +7,16 @@ val releaseVersion = "0.0.1"
 lazy val buildSettings = Seq(
   organization := "com.sparky",
   version := releaseVersion,
-  scalaVersion := "2.12.8"
+  scalaVersion := "2.11.12"
 )
 
 lazy val compilerSettings = scala.Seq[Def.Setting[_]](
-  scalacOptions += "-unchecked",
-  scalacOptions += "-deprecation"
+  scalacOptions += "-deprecation",
+  scalacOptions += "-encoding",
+  scalacOptions += "utf-8",
+  scalacOptions += "-explaintypes",
+  scalacOptions += "-language:higherKinds",
+  scalacOptions += "-unchecked"
 )
 
 lazy val testSettings = scala.Seq[Def.Setting[_]](

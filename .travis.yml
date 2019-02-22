@@ -4,4 +4,7 @@ scala:
    - 2.11.12
 
 script:
-- sbt clean update compile test
+  - sbt clean test
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)

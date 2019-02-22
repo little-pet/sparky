@@ -4,7 +4,7 @@ object Dependencies {
 
   object Version {
     val spark = "2.4.0"
-    val scalaTest = "3.2.0-SNAP10"
+    val scalaTest = "3.0.5"
     val wartremover = "2.4.1"
   }
 
