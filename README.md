@@ -1,2 +1,2 @@
 # Sparky
-There is you can find some tricks and boilerplates for #Apache Spark.
+There are you can find some tricks and boilerplates for #Apache Spark.
