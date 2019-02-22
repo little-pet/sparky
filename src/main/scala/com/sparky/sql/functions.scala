@@ -15,7 +15,7 @@ object functions {
   /**
     * Apply expression to column preserving column's name if any.
     */
-  def map_column(col: Column, f: Column => Column): Column = {
+  private def map_column(col: Column, f: Column => Column): Column = {
     col.expr match {
       case named: NamedExpression => f(col).as(named.name)
       case _ => f(col)
@@ -26,11 +26,14 @@ object functions {
     * Replace null value with zero.
     */
   def null_to_zero(col: Column): Column = {
-    map_column(col, coalesce(_, lit(0)))
+    map_column(col, coalesce(_, lit(literal = 0)))
   }
 
+  /**
+    * Replace null value with false.
+    */
   def null_to_false(col: Column): Column = {
-    map_column(col, coalesce(_, lit(false)))
+    map_column(col, coalesce(_, lit(literal = false)))
   }
 
   /**
@@ -54,7 +57,7 @@ object functions {
   def trim_to_null(col: Column): Column = {
     map_column(col, { c =>
       val trimmed = trim(col)
-      when(trimmed === lit(""), lit(null)).otherwise(trimmed)
+      when(trimmed === lit(literal = ""), lit(literal = null)).otherwise(trimmed)
     })
   }
 

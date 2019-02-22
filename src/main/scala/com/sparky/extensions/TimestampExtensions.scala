@@ -4,13 +4,15 @@ import java.sql.Timestamp
 import java.time.temporal.ChronoUnit.{DAYS, MONTHS}
 import java.time.{LocalDate, LocalDateTime, LocalTime, Month}
 
+/**
+  * Provides functions for dealing with timestamp.
+  * */
 object TimestampExtensions {
 
   implicit class TimestampModule(timestamp: Timestamp) {
     private def adjust(f: LocalDateTime => LocalDateTime): Timestamp = Timestamp.valueOf(f(timestamp.toLocalDateTime))
 
     private def project[T](f: LocalDateTime => T): T = f(timestamp.toLocalDateTime)
-
 
     def atMidnight: Timestamp = adjust(time => LocalDateTime.of(time.toLocalDate, LocalTime.MIDNIGHT))
 
@@ -22,9 +24,7 @@ object TimestampExtensions {
 
     def atStartOfYear: Timestamp = adjust(time => LocalDate.of(time.getYear, Month.JANUARY, 1).atStartOfDay())
 
-
     def isStartOfDay: Boolean = project(_.toLocalTime == LocalTime.MIDNIGHT)
-
 
     def year: Int = project(_.getYear)
 
@@ -32,18 +32,15 @@ object TimestampExtensions {
 
     def monthOfYear: Int = project(date => date.getMonthValue)
 
-
     def daysBetween(other: Timestamp): Long = DAYS.between(timestamp.toLocalDateTime, other.toLocalDateTime)
 
     def monthsBetween(other: Timestamp): Long = MONTHS.between(timestamp.toLocalDateTime, other.toLocalDateTime)
-
 
     def minusDays(days: Long): Timestamp = adjust(_.minusDays(days))
 
     def minusMonths(months: Long): Timestamp = adjust(_.minusMonths(months))
 
     def minusYears(years: Long): Timestamp = adjust(_.minusYears(years))
-
 
     def plusDays(days: Long): Timestamp = adjust(_.plusDays(days))
 

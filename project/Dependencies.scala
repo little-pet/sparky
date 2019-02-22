@@ -5,7 +5,6 @@ object Dependencies {
   object Version {
     val spark = "2.3.2"
     val scalaTest = "3.0.5"
-    val wartremover = "2.4.1"
   }
 
   val sparkCore = "org.apache.spark" %% "spark-core" % Version.spark % Provided
@@ -15,10 +14,9 @@ object Dependencies {
   val sparkCoreTest = "org.apache.spark" %% "spark-core" % Version.spark % Test
   val sparkSqlTest = "org.apache.spark" %% "spark-sql" % Version.spark % Test
   val sparkHiveTest = "org.apache.spark" %% "spark-hive" % Version.spark % Test
-//  val sparkCatalystTest = "org.apache.spark" %% "spark-catalyst" % Version.spark % Test
+  val sparkCatalystTest = "org.apache.spark" %% "spark-catalyst" % Version.spark % Test
 
   val scalaTest = "org.scalatest" %% "scalatest" % Version.scalaTest % Test
-  val wartremoverPlugin = compilerPlugin(dependency = "org.wartremover" %% "wartremover" % Version.wartremover)
 
   val sparky = Seq(
     sparkCore,
@@ -27,9 +25,10 @@ object Dependencies {
     sparkCoreTest,
     sparkCoreTest classifier "tests",
     sparkSqlTest,
-//    sparkSqlTest classifier "tests",
+    sparkSqlTest classifier "tests",
     sparkHiveTest,
-    scalaTest,
-    wartremoverPlugin
+    sparkCatalystTest,
+    sparkCatalystTest classifier "tests",
+    scalaTest
   )
 }
