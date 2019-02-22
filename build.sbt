@@ -11,6 +11,7 @@ lazy val buildSettings = Seq(
 )
 
 lazy val compilerSettings = scala.Seq[Def.Setting[_]](
+//  scalacOptions += "-Ylog-classpath",
   scalacOptions += "-deprecation",
   scalacOptions += "-encoding",
   scalacOptions += "utf-8",
